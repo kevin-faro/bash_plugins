@@ -1,0 +1,44 @@
+function right() {
+  N=1
+  F=" "
+  while test $# -gt 0; do
+    case "$1" in
+      -n)
+        shift
+        if test $# -gt 0; then
+          N=$1
+        else
+          echo "ERROR: no value for n"
+          return
+        fi
+        shift
+        ;;
+      -F)
+        shift
+        if test $# -gt 0; then
+          F=$1
+        else
+          echo "ERROR: no delimter"
+          return
+        fi
+        shift
+        ;;
+      *)
+        FILE=$1
+        shift
+        ;;
+    esac
+  done
+
+  while read data; do
+    echo $data | awk -F "$F" -v var="$N" '
+    {
+      a = $NF
+      for (i=1; i < var && i<NF; i++)
+        a = $(NF-i)" "a
+      done
+      print a
+    }'
+  done < "${FILE:-/dev/stdin}"
+}
+

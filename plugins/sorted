@@ -1,0 +1,5 @@
+function sorted() {
+  for FILE; do true; done
+  sort $@ > /tmp/$FILE.sorted
+  mv /tmp/$FILE.sorted $FILE
+}

@@ -1,0 +1,8 @@
+function cdl() {
+  LASTDIR=$(find ./* -type d -prune -exec ls -d {} \; | tail -1)
+  if [ -z $LASTDIR ]; then
+    echo "no directories …"
+  else
+    cd $LASTDIR
+  fi
+}

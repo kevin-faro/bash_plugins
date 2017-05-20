@@ -1,0 +1,5 @@
+function freq() {
+  FILE=${1:-/dev/stdin}
+  
+  cat $FILE | sort | uniq -c | sort -n
+}
